@@ -1,0 +1,22 @@
+#!/bin/bash
+#Script mise à jour système et installation
+
+#Test de la connexion internet
+ping -c3 8.8.8.8 > /dev/nul
+TEST=$?
+
+if [ $TEST -ne 0 ]
+    then
+        echo " --error"
+    else
+	#Mise à jour système
+	echo "Mise à jour système"
+	apt-get update && apt-get upgrade &
+	#Installation de vncServer
+	apt-get install realvnc-vnc-server &
+	#Installation de docker
+	curl -fsSL https://get.docker.com/ | sh &
+	service docker start&
+fi
+
+

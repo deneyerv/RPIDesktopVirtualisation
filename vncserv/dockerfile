@@ -1,0 +1,13 @@
+FROM armhf/debian:jessie
+RUN	apt-get update && \
+	apt-get clean && \
+	apt-get -y install vnc4server && \
+	apt-get -y install nano && \
+	apt-get -y install python && \
+	apt-get -y remove  
+
+RUN useradd --create-home -s /bin/bash user
+WORKDIR /home/user
+USER user
+CMD ["/bin/sh"]
+
